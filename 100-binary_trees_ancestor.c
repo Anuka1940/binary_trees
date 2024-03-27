@@ -1,26 +1,28 @@
 #include "binary_trees.h"
+
 /**
- * new
+ * binary_trees_ancestor - Finds the lowest common ancestor of two nodes
+ * @first: Pointer to the first node
+ * @second: Pointer to the second node
+ *
+ * Return: Pointer to the lowest common ancestor node of the two given nodes,
+ * or NULL if no common ancestor was found
  */
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second) {
-    /* Base case: If either node is NULL, return NULL */
-    if (first == NULL || second == NULL)
-        return NULL;
+binary_tree_t *binary_trees_ancestor(
+		const binary_tree_t *first,
+		const binary_tree_t *second)
+{
+	if (first == NULL || second == NULL)
+		return (NULL);
 
-    /* If either node is the root, the root is the lowest common ancestor */
-    if (first == second)
-        return (binary_tree_t *)first;
+	if (first == second)
+		return ((binary_tree_t *)first);
 
-    /* Recursive calls to find the LCA in the left and right subtrees */
-    binary_tree_t *left_lca = binary_trees_ancestor(first->left, second);
-    binary_tree_t *right_lca = binary_trees_ancestor(first->right, second);
+	binary_tree_t *left_lca = binary_trees_ancestor(first->left, second);
+	binary_tree_t *right_lca = binary_trees_ancestor(first->right, second);
 
-    /* If both left and right calls return non-NULL, it means
-       the nodes are found in different subtrees, hence the current node
-       is the lowest common ancestor */
-    if (left_lca && right_lca)
-        return (binary_tree_t *)first;
-
-    /* If one subtree returns non-NULL, return that value */
-    return (left_lca != NULL) ? left_lca : right_lca;
+	if (left_lca && right_lca)
+		return ((binary_tree_t *)first);
+	return ((left_lca != NULL) ? left_lca : right_lca);
 }
+
